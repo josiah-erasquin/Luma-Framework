@@ -19,12 +19,12 @@ jobs:
       run: '& "$env:VCPKG_INSTALLATION_ROOT\vcpkg.exe" integrate install'
     - name: Build Metaphor ReFantazio (Publishing-Release x64)
       shell: pwsh
-      run: msbuild Luma.sln /t:Metaphor_ReFantazio /m /p:Configuration=Publishing-Release /p:Platform=x64 /p:DefineConstants="REMOTE_BUILD=1"
+      run: msbuild "Source\Games\Metaphor ReFantazio\Metaphor ReFantazio.vcxproj" /m /p:Configuration=Publishing-Release /p:Platform=x64 /p:SolutionDir="$PWD\" /p:SolutionName=Luma /p:DefineConstants="REMOTE_BUILD=1"
     - name: List output
       shell: pwsh
-      run: Get-ChildItem -Recurse Binaries -Filter "Luma-*" | Select-Object FullName, Length
+      run: Get-ChildItem -Recurse -Filter "Luma-*.addon" -ErrorAction SilentlyContinue | Select-Object FullName, Length
     - uses: actions/upload-artifact@v4
       with:
         name: Luma-Metaphor-apicheck
-        path: Binaries/**/Luma-Metaphor*.addon
+        path: "**/Luma-Metaphor*.addon"
         if-no-files-found: error
