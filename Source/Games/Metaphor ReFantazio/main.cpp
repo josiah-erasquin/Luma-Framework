@@ -5,6 +5,9 @@
 
 #define ENABLE_FLICKERING_WORKAROUND 1
 
+// Skip non-D3D11 devices in every callback (OptiScaler dlss_12 / DLSS NR create a D3D11on12 device)
+#define CHECK_GRAPHICS_API_COMPATIBILITY 1
+
 #include "..\..\Core\core.hpp"
 
 #include "ShaderPatches\ShaderPatches.h"
